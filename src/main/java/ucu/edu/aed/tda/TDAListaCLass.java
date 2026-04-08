@@ -8,8 +8,7 @@ public class TDAListaCLass<T> implements TDALista<T> {
     private Nodo<T> cabeza;
     private int tamanio;
 
-    public TDAListaCLass() {
-        // Constructor para inicializar la estructura de datos interna de la lista
+    public TDAListaCLass() { // Constructor
         this.cabeza = null;
         this.tamanio = 0;
     }
@@ -23,7 +22,7 @@ public class TDAListaCLass<T> implements TDALista<T> {
 
     @Override
     public void agregar(T elem) {
-        // Implementación del método agregar al final de la lista
+        
         Nodo<T> nuevoNodo = new Nodo<>(elem);
         if (this.esVacio()) {   // Si la lista está vacía, el nuevo nodo se convierte en la cabeza
             cabeza = nuevoNodo;
@@ -40,7 +39,7 @@ public class TDAListaCLass<T> implements TDALista<T> {
 
     @Override
     public void agregar(int index, T elem) {
-        // Implementación del método agregar en una posición específica
+
         if (indiceValido(index)) { // Verificación de índice válido
          
             Nodo<T> nuevoNodo = new Nodo<>(elem); // Creación del nuevo nodo con el elemento a agregar
@@ -61,7 +60,6 @@ public class TDAListaCLass<T> implements TDALista<T> {
 
     @Override
     public T obtener(int index) {
-        // Implementación del método obtener un elemento por su índice
             if (indiceValido(index)){
                 Nodo<T> actual = cabeza; // Se inicia desde la cabeza de la lista
                 for (int i = 0; i < index; i++) { // Recorre la lista hasta llegar al índice deseado
@@ -75,19 +73,18 @@ public class TDAListaCLass<T> implements TDALista<T> {
 
     @Override
     public T remover(int index) {
-        // Implementación del método remover un elemento por su índice
         if (indiceValido(index)){
-            Nodo<T> actual = cabeza;
+            Nodo<T> actual = cabeza; // Se inicia desde la cabeza de la lista
             if (index == 0) {
-                cabeza = actual.getSiguiente();
+                cabeza = actual.getSiguiente(); // Si se remueve el nodo en la posición 0, la cabeza se actualiza al siguiente nodo 
             } else {
                 for (int i = 0; i < index - 1; i++) {
-                    actual = actual.getSiguiente();
+                    actual = actual.getSiguiente(); // Recorre la lista hasta llegar a la posición anterior al índice deseado
                 }
-                actual.setSiguiente(actual.getSiguiente().getSiguiente());
+                actual.setSiguiente(actual.getSiguiente().getSiguiente()); // Se actualiza el puntero del nodo anterior para saltar el nodo a remover
             }
-            tamanio--;
-            return actual.getDato();
+            tamanio--;  // Se decrementa el tamaño de la lista
+            return actual.getDato();    // Retorna el dato del nodo removido
         } else {
             throw new IndexOutOfBoundsException("Índice fuera de rango");
         }
@@ -95,7 +92,6 @@ public class TDAListaCLass<T> implements TDALista<T> {
 
     @Override
     public boolean remover(T elem) {
-        // Implementación del método remover la primera ocurrencia de un elemento
         if (elem != null) { // Verificación de elemento válido
             Nodo<T> actual = cabeza;
             Nodo<T> anterior = null;
@@ -118,37 +114,49 @@ public class TDAListaCLass<T> implements TDALista<T> {
 
     @Override
     public boolean contiene(T elem) {
-        // Implementación del método para determinar si la lista contiene un elemento
-        return false; // Placeholder, debe retornar true si se encuentra el elemento, false en caso contrario
+        Nodo<T> actual = cabeza; // Se inicia desde la cabeza de la lista
+        while (actual != null) { // Recorre la lista hasta el final
+            if (actual.getDato().equals(elem)) { // Si se encuentra el elemento, retorna true
+                return true;
+            }
+            actual = actual.getSiguiente();
+        }
+        return false; // Retorna false si no se encontró el elemento en la lista
     }
 
     @Override
     public int indiceDe(T elem) {
-        // Implementación del método para obtener el índice de la primera ocurrencia de un elemento
-        return -1; // Placeholder, debe retornar el índice del elemento o -1 si no se encuentra
+        Nodo<T> actual = cabeza; // Se inicia desde la cabeza de la lista
+        int index = 0; // Variable para llevar el índice actual
+        while (actual != null) { // Recorre la lista hasta el final
+            if (actual.getDato().equals(elem)) { // Si se encuentra el elemento, retorna el índice
+                return index;
+            }
+            actual = actual.getSiguiente();
+            index++;
+        }
+        return -1; // Retorna -1 si no se encontró el elemento en la lista
     }
 
     @Override
     public T buscar(Predicate<T> criterio) {
-        // Implementación del método para buscar un elemento que cumpla con un criterio específico
+        
         return null; // Placeholder, debe retornar el elemento encontrado o null si no se encuentra
     }
 
     @Override
     public TDALista<T> ordenar(Comparator<T> comparador) {
-        // Implementación del método para ordenar la lista según un comparador específico
+
         return this; // Placeholder, debe retornar una nueva lista ordenada
     }
 
     @Override
     public int tamanio() {
-        // Implementación del método para obtener el tamaño de la lista
-        return tamanio; // Placeholder, debe retornar el número de elementos en la lista
+        return tamanio;
     }
 
     @Override
     public boolean esVacio() {
-        // Implementación del método para determinar si la lista está vacía
         if (tamanio == 0) {
             return true; // Retorna true si el tamaño es 0, indicando que la lista está vacía
         }
@@ -157,7 +165,8 @@ public class TDAListaCLass<T> implements TDALista<T> {
 
     @Override
     public void vaciar() {
-        // Implementación del método para vaciar la lista
+        cabeza = null; // Se establece la cabeza a null para eliminar todas las referencias a los nodos
+        tamanio = 0; // Se restablece el tamaño a 0
     }
     
 }

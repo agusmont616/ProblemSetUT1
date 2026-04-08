@@ -4,14 +4,14 @@
 
 ## 🔹 A. Base de estructuras (TDA Lista)
 
-* [ ] Implementar clase concreta `TDALista<T>`
-* [ ] Definir estructura interna (lista enlazada simple)
-* [ ] Implementar nodo
+* [x] Implementar clase concreta `TDALista<T>`
+* [x] Definir estructura interna (lista enlazada simple)
+* [x] Implementar nodo
 
 ### Métodos
 
-* [ ] Inserción (inicio / final / posición)
-* [ ] Eliminación
+* [x] Inserción (inicio / final / posición)
+* [x] Eliminación
 * [ ] Búsqueda por criterio
 * [ ] Recorrido (iteración)
 
@@ -124,10 +124,10 @@
 
 ## 👤 Persona 1 – TDA Lista (core)
 
-* [ ] Implementación completa de `TDALista`
-* [ ] Nodo interno
-* [ ] Inserción
-* [ ] Eliminación
+* [x] Implementación completa de `TDALista`
+* [x] Nodo interno
+* [x] Inserción
+* [x] Eliminación
 * [ ] Búsqueda
 * [ ] Testing unitario
 
