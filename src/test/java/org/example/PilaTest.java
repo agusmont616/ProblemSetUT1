@@ -1,7 +1,7 @@
 package org.example;
 
 import junit.framework.TestCase;
-import ucu.edu.aed.Pila;
+import ucu.edu.aed.tda.Pila;
 
 public class PilaTest
 extends TestCase {

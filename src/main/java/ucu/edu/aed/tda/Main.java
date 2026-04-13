@@ -3,14 +3,12 @@ package ucu.edu.aed.tda;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 public class Main {
     public static void main(String[] args) {
 
         // ########## Ejercicio 19 ##########
-
         String rutaArchivo = "parentesis.txt";  // Archivo que contiene la secuencia de paréntesis a evaluar
-        TDAPilaClass<String> pila = new TDAPilaClass<>(); // Creo la pila
+        Pila<String> pila = new Pila<>(); // Creo la pila
         boolean esBalanceado = true;    // Bandera que determina si la secuencia es balanceada
 
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))){
