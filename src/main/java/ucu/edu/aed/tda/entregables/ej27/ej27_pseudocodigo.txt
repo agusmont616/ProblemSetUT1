@@ -1,0 +1,59 @@
+
+Comentario:
+La cola circular se implementa usando un vector de tamaño fijo y tres variables de control:
+frente, que indica la posición del primer elemento;
+fondo, que indica la posición del último elemento insertado;
+y cantidad, que indica cuántos elementos hay actualmente en la cola.
+Se llama circular porque, cuando se llega al final del vector, la siguiente posición vuelve al inicio usando la operación módulo.
+La operación PoneEnCola agrega un elemento al final de la cola si hay lugar disponible, y la operación QuitaDeCola devuelve y elimina el elemento ubicado al frente si la cola no está vacía.
+
+Precondición de PoneEnCola(unElemento):
+La cola no está llena.
+
+Postcondición de PoneEnCola(unElemento):
+El elemento queda agregado al final de la cola y la cantidad de elementos aumenta en 1.
+
+Precondición de QuitaDeCola():
+La cola no está vacía.
+
+Postcondición de QuitaDeCola():
+Se elimina el elemento ubicado al frente de la cola, se devuelve dicho elemento y la cantidad de elementos disminuye en 1.
+
+Estructura ColaCircular
+    datos[0..MAX-1]
+    frente
+    fondo
+    cantidad
+
+Inicialización
+    frente <- 0
+    fondo <- -1
+    cantidad <- 0
+
+Procedimiento PoneEnCola(unElemento)
+
+    Si cantidad = MAX Entonces
+        Escribir "Error: cola llena"
+    Sino
+        fondo <- (fondo + 1) mod MAX
+        datos[fondo] <- unElemento
+        cantidad <- cantidad + 1
+    FinSi
+
+FinProcedimiento
+
+Función QuitaDeCola() : Elemento
+
+    Definir elemento
+
+    Si cantidad = 0 Entonces
+        Escribir "Error: cola vacía"
+        Devolver NULL
+    Sino
+        elemento <- datos[frente]
+        frente <- (frente + 1) mod MAX
+        cantidad <- cantidad - 1
+        Devolver elemento
+    FinSi
+
+FinFunción
