@@ -3,12 +3,11 @@ package ucu.edu.aed.tda;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
-public class TDAListaCLass<T> implements TDALista<T> {
-
+public class Lista<T> implements TDALista<T> {
     private Nodo<T> cabeza;
     private int tamanio;
 
-    public TDAListaCLass() { // Constructor
+    public Lista() { // Constructor
         this.cabeza = null;
         this.tamanio = 0;
     }
@@ -40,22 +39,22 @@ public class TDAListaCLass<T> implements TDALista<T> {
     @Override
     public void agregar(int index, T elem) {
 
-        if (indiceValido(index)) { // Verificación de índice válido
-         
-            Nodo<T> nuevoNodo = new Nodo<>(elem); // Creación del nuevo nodo con el elemento a agregar
-        if (index == 0) {   // Si se agrega en la posición 0, el nuevo nodo se convierte en la nueva cabeza
+            if (index < 0 || index > tamanio) { // permitimos index == tamanio (insertar al final)
+            throw new IndexOutOfBoundsException("Índice fuera de rango");
+        }
+        Nodo<T> nuevoNodo = new Nodo<>(elem);
+        if (index == 0) {
             nuevoNodo.setSiguiente(cabeza);
             cabeza = nuevoNodo;
-        } else {    // Si se agrega en una posición diferente a 0, se recorre hasta la posición anterior y se inserta el nuevo nodo
+        } else {
             Nodo<T> actual = cabeza;
-            for (int i = 0; i < index - 1; i++) { // Recorre la lista hasta llegar a la posición anterior al índice deseado
+            for (int i = 0; i < index - 1; i++) {
                 actual = actual.getSiguiente();
             }
-            nuevoNodo.setSiguiente(actual.getSiguiente()); // El nuevo nodo apunta al siguiente nodo del actual
-            actual.setSiguiente(nuevoNodo); // El nodo actual apunta al nuevo nodo
-        }  
+            nuevoNodo.setSiguiente(actual.getSiguiente());
+            actual.setSiguiente(nuevoNodo);
         }
-        else {throw new IndexOutOfBoundsException("Índice fuera de rango");}
+        tamanio++;
     }
 
     @Override
@@ -75,16 +74,19 @@ public class TDAListaCLass<T> implements TDALista<T> {
     public T remover(int index) {
         if (indiceValido(index)){
             Nodo<T> actual = cabeza; // Se inicia desde la cabeza de la lista
+            T datoRemovido;
             if (index == 0) {
+                datoRemovido = cabeza.getDato(); // Se guarda el dato antes de mover la cabeza
                 cabeza = actual.getSiguiente(); // Si se remueve el nodo en la posición 0, la cabeza se actualiza al siguiente nodo 
             } else {
                 for (int i = 0; i < index - 1; i++) {
                     actual = actual.getSiguiente(); // Recorre la lista hasta llegar a la posición anterior al índice deseado
                 }
-                actual.setSiguiente(actual.getSiguiente().getSiguiente()); // Se actualiza el puntero del nodo anterior para saltar el nodo a remover
+                datoRemovido = actual.getSiguiente().getDato(); // Se guarda el dato del nodo a remover
+                actual.setSiguiente(actual.getSiguiente().getSiguiente()); // Se actualiza el puntero del nodo anterior para omitir el nodo a remover
             }
             tamanio--;  // Se decrementa el tamaño de la lista
-            return actual.getDato();    // Retorna el dato del nodo removido
+            return datoRemovido;    // Retorna el dato del nodo removido
         } else {
             throw new IndexOutOfBoundsException("Índice fuera de rango");
         }
@@ -140,14 +142,43 @@ public class TDAListaCLass<T> implements TDALista<T> {
 
     @Override
     public T buscar(Predicate<T> criterio) {
-        
-        return null; // Placeholder, debe retornar el elemento encontrado o null si no se encuentra
+        Nodo<T> actual = cabeza;
+        while (actual != null) {
+            if (criterio.test(actual.getDato())) {
+                return actual.getDato();
+            }
+            actual = actual.getSiguiente();
+        }
+        return null;
     }
 
     @Override
     public TDALista<T> ordenar(Comparator<T> comparador) {
+        Lista<T> ordenada = new Lista<>();
+        for (int i = 0; i < tamanio(); i++) { // Se agregan todos los elementos
+            ordenada.agregar(this.obtener(i));
+        }
 
-        return this; // Placeholder, debe retornar una nueva lista ordenada
+        for (int i = 0; i < ordenada.tamanio() - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < ordenada.tamanio(); j++) {
+                if (comparador.compare(ordenada.obtener(j), ordenada.obtener(minIndex)) < 0) {
+                    minIndex = j;
+                }
+            }
+
+            if (minIndex != i) {
+                T valorI = ordenada.obtener(i);
+                T valorMin = ordenada.obtener(minIndex);
+
+                ordenada.remover(minIndex);
+                ordenada.agregar(minIndex, valorI);
+                ordenada.remover(i);
+                ordenada.agregar(i, valorMin);
+            }
+        }
+
+        return ordenada; // Placeholder, debe retornar una nueva lista ordenada
     }
 
     @Override
@@ -168,5 +199,4 @@ public class TDAListaCLass<T> implements TDALista<T> {
         cabeza = null; // Se establece la cabeza a null para eliminar todas las referencias a los nodos
         tamanio = 0; // Se restablece el tamaño a 0
     }
-    
 }
