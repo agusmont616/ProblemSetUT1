@@ -1,0 +1,25 @@
+En nuestro TDA Lista, además de insertar y buscar elementos, eventualmente será
+necesario retirar un elemento de la misma.
+Se podrían definir los siguientes comportamientos:
+1. Quitar un elemento de la lista (si existe) y dejarlo disponible para su posterior
+utilización.
+2. Quitar y destruir un elemento (podría llamarse “Eliminar”).
+3. Otros comportamientos posibles (a definir).
+Consigna
+Discutir en el equipo la conveniencia de estos comportamientos y determinar:
+• Qué forma deberían tener (qué parámetros reciben como entrada).
+• Qué valor o resultado deberían devolver.
+
+
+1) Para el metodo "Quitar", los parametros serian la lista de la que quitar el elemento y el dato a quitar.
+Debe devolver el elemento retirado o en su defecto (si no se encontrase) un valor nulo.
+
+2) En caso del metodo “Eliminar”, los parametros serian los mismos que en el metodo quitar, la lista y el dato.
+En este caso el metodo podria devolver un booleano indicando true si se elimina y false si no se pudo eliminar o no existe. 
+Tambien podria directamente ser un metodo void y no devolver nada.
+
+3) Otros comportamientos podrian ser, vaciar la lista, quitar el ultimo elemento.
+
+El siguiente es un punto clave ya que, al retirar un nodo de la lista es fundamental actualizar correctamente el enlace entre nodos.
+Con esto evitamos perder la referencia en la lista. No quedan nodos sueltos.
+De esta forma aseguramos que la estructura de la lista no se vea afectada.
