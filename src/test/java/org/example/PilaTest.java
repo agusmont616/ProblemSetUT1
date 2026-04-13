@@ -1,13 +1,13 @@
 package org.example;
 
 import junit.framework.TestCase;
-import ucu.edu.aed.tda.TDAPilaClass;
+import ucu.edu.aed.Pila;
 
 public class PilaTest
 extends TestCase {
     
     public void testPila() {
-        TDAPilaClass<Integer> pila = new TDAPilaClass<>();
+        Pila<Integer> pila = new Pila<>();
 
         assertTrue(pila.esVacio());
 
