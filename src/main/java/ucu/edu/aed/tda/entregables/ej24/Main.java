@@ -25,15 +25,20 @@ public class Main {
         PF.agregar(alumno5);
         PF.agregar(alumno6);
 
+        Conjunto<TAlumno> union = (Conjunto<TAlumno>) AED1.union(PF);
+        Conjunto<TAlumno> interseccion = (Conjunto<TAlumno>) AED1.interseccion(PF);
+
         System.out.println("Alumnos en 'Cualquiera de los dos cursos o ambos':");
-        System.out.println(AED1.union(PF));
-        System.out.println();
+        for (int i = 0; i < union.tamanio(); i++) {
+            TAlumno alumno = union.obtener(i);
+            System.out.println(alumno.getInfo());
+        }
 
         System.out.println("Alumnos en 'Ambos cursos':");
-        System.out.println(AED1.interseccion(PF));
-        System.out.println();
-
-        
+        for (int i = 0; i < interseccion.tamanio(); i++) {
+            TAlumno alumno = interseccion.obtener(i);
+            System.out.println(alumno.getInfo());
+        }
 
 
 

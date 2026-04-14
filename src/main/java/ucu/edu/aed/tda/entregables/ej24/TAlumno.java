@@ -16,6 +16,11 @@ public class TAlumno {
     }
 
     // Getters y setters
+
+    public String getInfo() {
+        return nombre + " " + apellido + ", Cédula: " + cedula;
+    }
+
     public String getNombre() {
         return nombre;
     }
