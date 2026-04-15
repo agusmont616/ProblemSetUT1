@@ -3,6 +3,7 @@ package ucu.edu.aed.tda.entregables.ej17;
 import ucu.edu.aed.utils.FileUtils;
 
 public class Ejercicio17 {
+
     public static void main(String[] args) {
         Biblioteca biblioteca = new Biblioteca();
 
@@ -16,7 +17,9 @@ public class Ejercicio17 {
         biblioteca.listarLibros();
     }
 
+    // Lee adquisiciones desde un archivo y retorna el valor total incorporado (precio * cantidad)
     public static double procesarAdquisiciones(Biblioteca biblioteca, String archivo) {
+        // Array para poder modificar el acumulador dentro del lambda
         final double[] total = {0};
 
         FileUtils.leerLineas(archivo, linea -> {
@@ -33,7 +36,9 @@ public class Ejercicio17 {
         return total[0];
     }
 
+    // Lee préstamos y devoluciones desde un archivo y retorna el total de ejemplares prestados
     public static int procesarPrestamos(Biblioteca biblioteca, String archivo) {
+        // Array para poder modificar el acumulador dentro del lambda
         final int[] totalPrestados = {0};
 
         FileUtils.leerLineas(archivo, linea -> {

@@ -13,6 +13,7 @@ public class Libro {
         this.cantidadEjemplares = cantidadEjemplares;
     }
 
+    // GETTERS
     public String getCodigo() {
         return codigo;
     }
@@ -29,8 +30,9 @@ public class Libro {
         return cantidadEjemplares;
     }
 
+
     public void agregarEjemplares(int cantidad) {
-        this.cantidadEjemplares = this.cantidadEjemplares + cantidad;
+        this.cantidadEjemplares = this.cantidadEjemplares + cantidad; // Suma la cantidad de ejemplares al stock actual
     }
 
     public int prestarEjemplares(int cantidad) {
@@ -42,15 +44,15 @@ public class Libro {
             cantidadPrestada = cantidad;
             this.cantidadEjemplares = this.cantidadEjemplares - cantidad;
         }
-        return cantidadPrestada;
+        return cantidadPrestada; // Devuelve la cantidad de ejemplares realmente prestada, que puede ser menor a la solicitada si no hay suficiente stock
     }
 
     public void devolverEjemplares(int cantidad) {
-        this.cantidadEjemplares = this.cantidadEjemplares + cantidad;
+        this.cantidadEjemplares = this.cantidadEjemplares + cantidad; // Suma la cantidad de ejemplares devueltos al stock actual
     }
 
-    @Override
+
     public String toString() {
         return this.titulo + " | " + this.codigo + " | $" + this.precioReposicion + " | stock: " + this.cantidadEjemplares;
-    }
+    } // Devuelve una representación en cadena del libro con su título, código, precio de reposición y cantidad de ejemplares disponibles
 }

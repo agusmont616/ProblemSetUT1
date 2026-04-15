@@ -17,6 +17,7 @@ public class TAlumno {
 
     // Getters y setters
 
+    // Muestra info completa para listado
     public String getInfo() {
         return nombre + " " + apellido + ", Cédula: " + cedula;
     }
